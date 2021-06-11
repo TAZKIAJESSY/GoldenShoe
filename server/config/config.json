@@ -1,0 +1,21 @@
+{
+  "development": {
+    "url": "postgres://vlugiwki:4PiSueSQ3F8CyNOYZMOpcGz7gdapocRM@hattie.db.elephantsql.com/vlugiwki",
+    "dialect": "postgres",
+    "operatorsAliases": "0"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

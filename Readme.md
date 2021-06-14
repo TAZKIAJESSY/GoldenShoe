@@ -2,7 +2,7 @@
 
 ### LINKS
 
-- [Database_Model](https://dbdiagram.io/d/60c0a6650c1ff875fcd41964)
+- [Database Model](https://dbdiagram.io/d/60c0a6650c1ff875fcd41964)
 
 - [Kanban Project Board](https://github.com/TAZKIAJESSY/GoldenShoe/projects/1?add_cards_query=is%3Aopen)
 
@@ -26,10 +26,10 @@
 ```bash/zsh
 
  clone the app
- git clone git@github.com:DionAlting/Icebreaker-backend.git
+ git clone git@github.com:TAZKIAJESSY/GoldenShoe.git
  npm install
  cd client
-start client: npm run start
+ start client: npm run start
  cd server
-Start development server: npx nodemon index.js
+ Start development server: npx nodemon index.js
 ```

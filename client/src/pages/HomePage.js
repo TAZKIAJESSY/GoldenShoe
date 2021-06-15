@@ -5,6 +5,8 @@ import { Spinner } from "react-bootstrap";
 import "./HomePage.css";
 
 import ProductCard from "../component/ProductCard";
+import FooterPart from "../component/FooterPart";
+
 import { fetchCategoryList } from "../store/category/actions";
 import { fetchProductList } from "../store/product/actions";
 import { selectCategories } from "../store/category/selectors";
@@ -56,8 +58,16 @@ export default function HomePage() {
 
   return (
     <div className="container-fluid">
-      <h1>Two Unequal Responsive Columns</h1>
-      <p>Resize the browser window to see the effect.</p>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {" "}
+        {/* <h1>We ensure good quality and customer satisfaction!</h1> */}
+      </div>
 
       <div className="row">
         <div className="col-sm-4 " style={{ marginTop: 30 }}>
@@ -159,6 +169,9 @@ export default function HomePage() {
             )}
           </div>
         </div>
+      </div>
+      <div className="row">
+        <FooterPart />
       </div>
     </div>
   );

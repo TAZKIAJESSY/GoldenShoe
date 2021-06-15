@@ -4,6 +4,8 @@
 
 - [Database Model](https://dbdiagram.io/d/60c0a6650c1ff875fcd41964)
 
+- [Wire Frame](https://res.cloudinary.com/jessy/image/upload/v1623695572/godenShoe_xiuo04.png)
+
 - [Kanban Project Board](https://github.com/TAZKIAJESSY/GoldenShoe/projects/1?add_cards_query=is%3Aopen)
 
 ### TECHNOLOGIES

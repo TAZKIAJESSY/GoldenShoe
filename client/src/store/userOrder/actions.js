@@ -11,6 +11,10 @@ export function fetchedOrder(list) {
   return { type: "userOrder/fetchedOrder", payload: list };
 }
 
+export function fetchedReturnProduct(returnproduct) {
+  return { type: "userOrder/fetchedReturnProduct", payload: returnproduct };
+}
+
 //create new order
 export const createOrder = (items) => async (dispatch, getState) => {
   dispatch(startLoading());
@@ -51,3 +55,26 @@ export const getUserOrder = () => async (dispatch, getState) => {
     console.log(error.message);
   }
 };
+
+//return user order
+export const returnProduct =
+  (orderId, returnProducts) => async (dispatch, getState) => {
+    try {
+      const token = selectToken(getState());
+
+      console.log("idssss:", orderId);
+
+      const response = await axios.post(
+        `${API_URL}/orders/returnproduct`,
+        { orderId: orderId, returnProducts: returnProducts },
+
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      console.log("return product: ", response);
+
+      dispatch(fetchedReturnProduct(response.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };

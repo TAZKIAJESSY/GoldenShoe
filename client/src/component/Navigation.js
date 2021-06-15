@@ -3,15 +3,17 @@ import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { selectToken, selectUser } from "../store/user/selectors";
+import { selectCartItems } from "../store/cart/selectors";
+
 import LoggedIn from "./LoggedIn";
 
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { Navbar, Nav } from "react-bootstrap";
 import godenShoe from "../Assets/Golden Shoe1.png";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
+  const cartItem = useSelector(selectCartItems());
 
   return (
     <Navbar bg="dark" variant={"dark"} expand="lg">
@@ -43,12 +45,14 @@ export default function Navigation() {
           </Nav.Link>
 
           <Nav.Link as={NavLink} to={"/cart"}>
-            🛒
+            🛒 {cartItem.length}
           </Nav.Link>
 
-          <Nav.Link as={NavLink} to={"/myorder"}>
-            My Order
-          </Nav.Link>
+          {user.token ? (
+            <Nav.Link as={NavLink} to={"/myorder"}>
+              My Order
+            </Nav.Link>
+          ) : null}
 
           {token ? (
             <LoggedIn />

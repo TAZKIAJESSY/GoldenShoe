@@ -15,7 +15,9 @@ export default function LoggedIn() {
         <i style={{ color: "white" }}> Hello</i>{" "}
         <b style={{ color: "yellow" }}> 🌸 {user.firstName}</b>
       </Nav.Item>
-      <Button onClick={() => dispatch(logOut())}>Logout</Button>
+      <Button variant="warning" onClick={() => dispatch(logOut())}>
+        Logout
+      </Button>
     </>
   );
 }

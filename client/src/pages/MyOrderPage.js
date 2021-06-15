@@ -20,7 +20,7 @@ export default function MyOrderPage() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="container">
       {" "}
       <div>
         {loading ? (
@@ -33,31 +33,38 @@ export default function MyOrderPage() {
             </Spinner>
           </div>
         ) : (
-          <div>
+          <div
+            className="card-container"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <div className="row">
               {order ? (
                 order.map((p, index) => {
                   return (
                     <div
-                      className=""
+                      className="col-lg-4 "
                       style={{
                         display: "flex",
                         justifyContent: "space-around",
                         flexFlow: "wrap",
-                        // border: "1px solid #ddd",
                         margin: "20px",
                         padding: "10px",
-                        // boxShadow: "2px 8px 20px #ddd",
                         borderRadius: "10px",
                       }}
                       key={index}
                     >
-                      <OrderCard
-                        id={p.id}
-                        expectedDelivery={p.expectedDelivery}
-                        status={p.status}
-                        products={p.products}
-                      />
+                      {p.products && p.products.length > 0 ? (
+                        <OrderCard
+                          id={p.id}
+                          expectedDelivery={p.expectedDelivery}
+                          status={p.status}
+                          products={p.products}
+                        />
+                      ) : null}
                     </div>
                   );
                 })

@@ -24,3 +24,8 @@ foreignKey: "productId",
 
       orderItem.belongsTo(models.order, { foreignKey: "orderId" }); //join table
       orderItem.belongsTo(models.product, { foreignKey: "productId" }); //join table
+
+=>**order--productReturn--product**
+
+      productReturn.belongsTo(models.order, { foreignKey: "orderId" });
+      productReturn.belongsTo(models.product, { foreignKey: "productId" });

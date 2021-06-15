@@ -5,6 +5,7 @@ const authMiddleware = require("../auth/middleware");
 const Order = require("../models").order;
 const OrderItem = require("../models").orderItem;
 const Product = require("../models").product;
+const ProductReturn = require("../models").productReturn;
 
 // //create a new order for user
 // // http POST :4000/orders
@@ -58,5 +59,58 @@ router.get("/", authMiddleware, async (req, res, next) => {
     next(error.message);
   }
 });
+
+//create return
+// http POST :4000/login email=jessy@gmail.com password=1234
+// http POST :4000/orders/returnproduct orderId=3 productId=5 Authorization:"Bearer token"
+router.post("/returnproduct", authMiddleware, async (req, res, next) => {
+  try {
+    const { orderId, returnProducts } = req.body;
+
+    console.log("req body", req.body);
+
+    returnProducts.forEach(async (pr) => {
+      const returnProduct = await ProductReturn.create({
+        orderId: orderId,
+        productId: pr.productId,
+        reason: pr.reason,
+      });
+
+      if (returnProduct) {
+        const deleteItem = await OrderItem.destroy({
+          where: { orderId: orderId, productId: pr.productId },
+        });
+      }
+    });
+
+    res.status(200).send({ message: "Product return successfully processed!" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// //delete a specific order product while returning
+// router.delete(
+//   "/:orderId/:productId",
+//   authMiddleware,
+//   async (req, res, next) => {
+//     try {
+//       const oid = parseInt(req.params.orderId);
+//       const pid = parseInt(req.params.productId);
+
+//       if (Order.userId === req.user.id) {
+//         const deleteRow = await OrderItem.destroy({
+//           where: { orderId: oid, productId: pid },
+//         });
+
+//         res.status(200).send({ message: "Order product deleted" });
+//       } else {
+//         return res.status(400).send("You are not authorized to delete order");
+//       }
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+//   }
+// );
 
 module.exports = router;

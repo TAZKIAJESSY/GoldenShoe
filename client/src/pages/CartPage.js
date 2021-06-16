@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -98,30 +98,38 @@ export default function Cart() {
                   <strong>€{Math.round(totalCartPrice * 100) / 100}</strong>
                 </td>
               </tr>
-
-              <tr>
-                <td>
-                  <strong>Coupon:</strong>
-                </td>
-                <td> </td>
-                <td> </td>
-                <td>
-                  <strong> - €{coupon?.value}</strong>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>SubTotal:</strong>
-                </td>
-                <td> </td>
-                <td> </td>
-                <td>
-                  <strong>
-                    €{Math.round((totalCartPrice - coupon?.value) * 100) / 100}
-                  </strong>
-                </td>
-              </tr>
+              {/* if coupon exist then calculate total price */}
+              {coupon ? (
+                <>
+                  {" "}
+                  <tr>
+                    <td>
+                      <strong>Coupon:</strong>
+                    </td>
+                    <td> </td>
+                    <td> </td>
+                    <td>
+                      <strong> - €{coupon?.value}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>SubTotal:</strong>
+                    </td>
+                    <td> </td>
+                    <td> </td>
+                    <td>
+                      <strong>
+                        €
+                        {Math.round((totalCartPrice - coupon?.value) * 100) /
+                          100}
+                      </strong>
+                    </td>
+                  </tr>
+                </>
+              ) : (
+                <></>
+              )}
             </tbody>
           </Table>
           <div>

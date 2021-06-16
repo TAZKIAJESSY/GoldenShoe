@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Spinner } from "react-bootstrap";
@@ -16,14 +17,15 @@ import {
 } from "../store/product/selectors";
 
 export default function HomePage() {
+  const [searchText, set_searchText] = useState();
+  const [filterCategory, set_filterCategory] = useState();
+  const [sortText, set_sortText] = useState();
+
+  // const history = useHistory();
   const dispatch = useDispatch();
   const cat = useSelector(selectCategories);
   const items = useSelector(selectProduct);
   const loading = useSelector(selectProductLoading);
-
-  const [searchText, set_searchText] = useState();
-  const [filterCategory, set_filterCategory] = useState();
-  const [sortText, set_sortText] = useState();
 
   useEffect(() => {
     dispatch(fetchCategoryList);
@@ -38,6 +40,10 @@ export default function HomePage() {
         return r.categoryId === parseInt(filterCategory);
       })
     : items;
+
+  // const routeParam = encodeURIComponent(searchText);
+  // console.log("router params", routeParam);
+  // history.push(`/${routeParam}`);
 
   const searched = searchText
     ? filterItems.filter((p) =>
@@ -58,7 +64,7 @@ export default function HomePage() {
 
   return (
     <div className="container-fluid">
-      <div
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -66,113 +72,114 @@ export default function HomePage() {
         }}
       >
         {" "}
-        {/* <h1>We ensure good quality and customer satisfaction!</h1> */}
-      </div>
+        <h1>We ensure good quality and customer satisfaction!</h1>
+      </div> */}
+      <>
+        <div className="row">
+          <div className="col-lg-4  " style={{ marginTop: 30 }}>
+            <div className="">
+              <p className="styleBox">Search Your Desired Shoes</p>
 
-      <div className="row">
-        <div className="col-sm-4 " style={{ marginTop: 30 }}>
-          <div className="">
-            <p className="styleBox">Search Your Desired Shoes</p>
-
-            <form>
-              <input
-                style={{ width: 300, height: 30 }}
-                type={searchText}
-                onChange={(e) => set_searchText(e.target.value)}
-                placeholder="Search..."
-              />
-            </form>
-          </div>
-          <br />
-          <div className="">
-            <p className="styleBox">Find Your Category</p>
+              <form>
+                <input
+                  style={{ width: 300, height: 30 }}
+                  type={searchText}
+                  onChange={(e) => set_searchText(e.target.value)}
+                  placeholder="Search..."
+                />
+              </form>
+            </div>
             <br />
-            <select
-              style={{ width: 300, height: 30 }}
-              onChange={(e) => {
-                set_filterCategory(e.target.value);
-              }}
-            >
-              <option>Select category: </option>
-              {cat ? (
-                cat.map((c, index) => {
-                  return (
-                    <option key={index} value={c.id}>
-                      {c.name}
-                    </option>
-                  );
-                })
-              ) : (
-                <></>
-              )}
-            </select>{" "}
-          </div>
-          <br />
-          <div className="">
-            <p className="styleBox">Sort By Price</p> <br />
-            <select
-              style={{ width: 300, height: 30 }}
-              placeholder="Sort"
-              onChange={changeSorting}
-            >
-              <option value="">Select an option</option>
-              <option value="Price">Price</option>
-            </select>
-          </div>
-        </div>
-        <div className="col-sm-8">
-          {" "}
-          <div>
-            {loading ? (
-              <div
-                className="d-flex justify-content-center align-items-center mt-5"
-                style={{ height: 700, margin: "auto" }}
+            <div className="">
+              <p className="styleBox">Find Your Category</p>
+              <br />
+              <select
+                style={{ width: 300, height: 30 }}
+                onChange={(e) => {
+                  set_filterCategory(e.target.value);
+                }}
               >
-                <Spinner animation="border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </Spinner>
-              </div>
-            ) : (
-              <div>
-                <div className="row">
-                  {product_sorted ? (
-                    product_sorted.map((p, index) => {
-                      return (
-                        <div
-                          className=""
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-around",
-                            flexFlow: "wrap",
-                            // border: "1px solid #ddd",
-                            margin: "20px",
-                            padding: "10px",
-                            // boxShadow: "2px 8px 20px #ddd",
-                            borderRadius: "10px",
-                          }}
-                          key={index}
-                        >
-                          <ProductCard
-                            id={p.id}
-                            name={p.name}
-                            imageUrl={p.imageUrl}
-                            price={p.price}
-                          />
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <p></p>
-                  )}{" "}
+                <option>Select category: </option>
+                {cat ? (
+                  cat.map((c, index) => {
+                    return (
+                      <option key={index} value={c.id}>
+                        {c.name}
+                      </option>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
+              </select>{" "}
+            </div>
+            <br />
+            <div className="">
+              <p className="styleBox">Sort By Price</p> <br />
+              <select
+                style={{ width: 300, height: 30 }}
+                placeholder="Sort"
+                onChange={changeSorting}
+              >
+                <option value="">Select an option</option>
+                <option value="Price">Price</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-lg-8 ">
+            {" "}
+            <div>
+              {loading ? (
+                <div
+                  className="d-flex justify-content-center align-items-center mt-5"
+                  style={{ height: 700, margin: "auto" }}
+                >
+                  <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div>
+                  <div className="row">
+                    {product_sorted ? (
+                      product_sorted.map((p, index) => {
+                        return (
+                          <div
+                            className=""
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-around",
+                              flexFlow: "wrap",
+                              // border: "1px solid #ddd",
+                              margin: "20px",
+                              padding: "10px",
+                              // boxShadow: "2px 8px 20px #ddd",
+                              borderRadius: "10px",
+                            }}
+                            key={index}
+                          >
+                            <ProductCard
+                              id={p.id}
+                              name={p.name}
+                              imageUrl={p.imageUrl}
+                              price={p.price}
+                            />
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p></p>
+                    )}{" "}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <FooterPart />
-      </div>
+        <div className="row">
+          <FooterPart />
+        </div>
+      </>
     </div>
   );
 }

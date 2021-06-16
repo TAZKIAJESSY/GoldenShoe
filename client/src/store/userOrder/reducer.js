@@ -15,6 +15,13 @@ export default function productSliceReducer(state = initialState, action) {
         orders: action.payload,
       };
     }
+    case "userOrder/fetchedReturnProduct": {
+      return {
+        ...state,
+        loading: false,
+        orders: action.payload,
+      };
+    }
 
     default: {
       return state;

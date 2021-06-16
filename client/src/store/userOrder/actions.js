@@ -11,9 +11,9 @@ export function fetchedOrder(list) {
   return { type: "userOrder/fetchedOrder", payload: list };
 }
 
-export function fetchedReturnProduct(returnproduct) {
-  return { type: "userOrder/fetchedReturnProduct", payload: returnproduct };
-}
+// export function fetchedReturnProduct(returnproduct) {
+//   return { type: "userOrder/fetchedReturnProduct", payload: returnproduct };
+// }
 
 //create new order
 export const createOrder = (items) => async (dispatch, getState) => {
@@ -62,8 +62,6 @@ export const returnProduct =
     try {
       const token = selectToken(getState());
 
-      console.log("idssss:", orderId);
-
       const response = await axios.post(
         `${API_URL}/orders/returnproduct`,
         { orderId: orderId, returnProducts: returnProducts },
@@ -73,7 +71,16 @@ export const returnProduct =
 
       console.log("return product: ", response);
 
-      dispatch(fetchedReturnProduct(response.data));
+      //dispatch(fetchedReturnProduct(response.data));
+
+      const response1 = await axios.get(
+        `${API_URL}/orders`,
+
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      console.log("Specific user order: ", response1);
+      dispatch(fetchedOrder(response1.data));
     } catch (error) {
       console.log(error.message);
     }

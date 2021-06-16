@@ -50,13 +50,12 @@ export default function OrderCard(props) {
                         className="form-check-input"
                         type="checkbox"
                         value={p.id}
-                        //checked={returnChecked}
                         onChange={(e) => setReturnChecked(!returnChecked)}
                         id="flexCheckDefault"
                       />
                       <label
                         className="form-check-label"
-                        for="flexCheckDefault"
+                        htmlFor="flexCheckDefault"
                       >
                         Check to return
                       </label>
@@ -68,13 +67,12 @@ export default function OrderCard(props) {
                         className="my-1 mr-sm-2"
                         id="inlineFormCustomSelectPref"
                         custom
-                        //value={cuisineType}
                         onChange={(event) =>
                           handleAddReturnProduct(p.id, event.target.value)
                         }
                         required
                       >
-                        <option value="0">Choose...</option>
+                        <option value="0">Reason...</option>
                         <option value="Incorrect shoe size">
                           Incorrect shoe size
                         </option>

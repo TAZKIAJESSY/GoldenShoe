@@ -8,6 +8,7 @@ import { selectCartItems } from "../store/cart/selectors";
 import LoggedIn from "./LoggedIn";
 
 import { Navbar, Nav } from "react-bootstrap";
+import "./Navigation.css";
 import godenShoe from "../Assets/Golden Shoe1.png";
 
 export default function Navigation() {
@@ -44,9 +45,12 @@ export default function Navigation() {
             Home
           </Nav.Link>
 
-          <Nav.Link as={NavLink} to={"/cart"}>
-            🛒 {cartItem.length}
-          </Nav.Link>
+          <div className="nav-cart">
+            <span>{cartItem.length}</span>
+            <Nav.Link as={NavLink} to={"/cart"}>
+              🛒
+            </Nav.Link>
+          </div>
 
           {user.token ? (
             <Nav.Link as={NavLink} to={"/myorder"}>

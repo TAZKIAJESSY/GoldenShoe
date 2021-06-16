@@ -72,6 +72,7 @@ export const returnProduct =
       console.log("return product: ", response);
 
       //dispatch(fetchedReturnProduct(response.data));
+      dispatch(startLoading());
 
       const response1 = await axios.get(
         `${API_URL}/orders`,

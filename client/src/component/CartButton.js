@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -9,15 +9,10 @@ import {
   selectSpecificProductQuantity,
 } from "../store/cart/selectors";
 import { selectOneProduct } from "../store/product/selectors";
-//import { fetchProductList } from "../store/product/actions";
 import { addOneToCart, removeOneFromCart } from "../store/cart/actions";
 
 export default function CartButton(props) {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchProductList());
-  // }, [dispatch]);
 
   const specificProduct = useSelector(selectOneProduct(props.id));
 
@@ -29,8 +24,6 @@ export default function CartButton(props) {
   const isInCart = cart?.find((item) => {
     return item.product.id === props.id;
   });
-
-  //console.log("is in cart:", isInCart);
 
   return (
     <div>

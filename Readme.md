@@ -12,7 +12,7 @@
 
 <div align="center">
 	<br>
-		<img src="https://res.cloudinary.com/jessy/image/upload/v1624113186/goldenshoe_1_inoktx.gif"  alt="Click to see the source">
+		<img src="https://res.cloudinary.com/jessy/image/upload/v1624113509/shoegolden_htys73.gif"  alt="Click to see the source">
 	</a>
 	<br>
 </div>

@@ -8,6 +8,17 @@
 
 - [Kanban Project Board](https://github.com/TAZKIAJESSY/GoldenShoe/projects/1?add_cards_query=is%3Aopen)
 
+### DEMO
+
+<div align="center">
+	<br>
+		<img src="https://res.cloudinary.com/jessy/image/upload/v1624113186/goldenshoe_1_inoktx.gif"  alt="Click to see the source">
+	</a>
+	<br>
+</div>
+
+<br/>
+
 ### TECHNOLOGIES
 
 - JavaScript
